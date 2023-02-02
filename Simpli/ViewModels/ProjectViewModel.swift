@@ -17,6 +17,10 @@ struct ProjectViewModel {
     var title: String { project.title ?? "" }
 
     var color: UIColor { project.color ?? .clear }
+
+    var items: [ItemViewModel] {
+        Item.getItems(projectId: project.objectID).map(ItemViewModel.init)
+    }
 }
 
 struct ItemViewModel {

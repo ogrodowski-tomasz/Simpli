@@ -24,6 +24,7 @@
 		1EFCBBD1298BF0CE00C2D529 /* Item+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD0298BF0CE00C2D529 /* Item+Extensions.swift */; };
 		1EFCBBD3298BF2B800C2D529 /* HomeTableSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD2298BF2B800C2D529 /* HomeTableSectionFooterView.swift */; };
 		1EFCBBD5298BF37C00C2D529 /* HomeTableSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD4298BF37C00C2D529 /* HomeTableSectionHeaderView.swift */; };
+		1EFCBBD8298BFDBD00C2D529 /* ProjectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD7298BFDBD00C2D529 /* ProjectsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		1EFCBBD0298BF0CE00C2D529 /* Item+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+Extensions.swift"; sourceTree = "<group>"; };
 		1EFCBBD2298BF2B800C2D529 /* HomeTableSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionFooterView.swift; sourceTree = "<group>"; };
 		1EFCBBD4298BF37C00C2D529 /* HomeTableSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionHeaderView.swift; sourceTree = "<group>"; };
+		1EFCBBD7298BFDBD00C2D529 /* ProjectsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		1EFCBB9F298BDCA800C2D529 /* Simpli */ = {
 			isa = PBXGroup;
 			children = (
+				1EFCBBD6298BFDAE00C2D529 /* Services */,
 				1EFCBBC9298BEC8100C2D529 /* ViewModels */,
 				1EFCBBC1298BE8EC00C2D529 /* Models */,
 				1EFCBBBE298BE84300C2D529 /* Managers */,
@@ -135,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				1EFCBBBF298BE8D200C2D529 /* CoreDataManager.swift */,
-				1EFCBBCC298BEEEA00C2D529 /* BaseModel.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -143,6 +145,7 @@
 		1EFCBBC1298BE8EC00C2D529 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1EFCBBCC298BEEEA00C2D529 /* BaseModel.swift */,
 				1EFCBBC2298BE8F800C2D529 /* ProjectModel.xcdatamodeld */,
 			);
 			path = Models;
@@ -154,6 +157,14 @@
 				1EFCBBCA298BEC8700C2D529 /* ProjectViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		1EFCBBD6298BFDAE00C2D529 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1EFCBBD7298BFDBD00C2D529 /* ProjectsService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +248,7 @@
 				1EFCBBBD298BE3E200C2D529 /* HomeTableHeaderView.swift in Sources */,
 				1EFCBBA1298BDCA800C2D529 /* AppDelegate.swift in Sources */,
 				1EFCBBCF298BF09600C2D529 /* Project+Extensions.swift in Sources */,
+				1EFCBBD8298BFDBD00C2D529 /* ProjectsService.swift in Sources */,
 				1EFCBBC8298BEAA700C2D529 /* Project+CoreDataProperties.swift in Sources */,
 				1EFCBBD1298BF0CE00C2D529 /* Item+Extensions.swift in Sources */,
 				1EFCBBB5298BE10700C2D529 /* Constans.swift in Sources */,

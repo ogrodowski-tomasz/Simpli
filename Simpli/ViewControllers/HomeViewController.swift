@@ -5,10 +5,13 @@
 //  Created by Tomasz Ogrodowski on 02/02/2023.
 //
 
+import Combine
 import CoreData
 import UIKit
 
 class HomeViewController: UIViewController {
+
+    // MARK: - View Components
 
     private let tableHeader = HomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: HomeTableHeaderView.height + 50))
 
@@ -22,18 +25,27 @@ class HomeViewController: UIViewController {
         return tableView
     }()
 
+    // MARK: - Properties
+
+    private var cancellables = Set<AnyCancellable>()
+    private let projectService = ProjectsService()
+
+    private var projects = [ProjectViewModel]() {
+        didSet { tableView.reloadData() }
+    }
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constans.appColor
         setupNavigationBar()
         setupTableView()
         layout()
-        fetchData()
+        setupProjectSubscription()
     }
 
-    private var projects = [ProjectViewModel]() {
-        didSet { tableView.reloadData() }
-    }
+    // MARK: - Methods
 
     private func setupNavigationBar() {
         setTitle("Simpli", andImage: UIImage(systemName: "figure.wave.circle.fill")!)
@@ -59,32 +71,43 @@ class HomeViewController: UIViewController {
         ])
     }
 
+    private func setupProjectSubscription() {
+        projectService.subject
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("DEBUG: Subscription finished successfully")
+                case .failure(let error):
+                    print("DEBUG: Subscription finished with failure: \(error)")
+                }
+            } receiveValue: { [weak self] fetchedProjects in
+                print("DEBUG: Received new value!")
+                self?.projects = fetchedProjects
+            }
+            .store(in: &cancellables)
+    }
+
+    // MARK: - Selectors
+
     @objc
     private func plusButtonTapped() {
         print("DEBUG: plus tapped")
-        let newProject = Project(context: CoreDataManager.shared.viewContext)
-        newProject.title = "New Project"
-        newProject.color = UIColor.systemTeal
-        try? CoreDataManager.shared.viewContext.save()
-        fetchData()
-    }
-
-    private func fetchData() {
-        let request = Project.fetchRequest()
-        do {
-            let projects: [Project] = try CoreDataManager.shared.viewContext.fetch(request)
-            self.projects = projects.map(ProjectViewModel.init)
-        } catch  {
-            print("DEBUG: error")
-        }
+        projectService.addProject()
+        
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let item = projects[indexPath.section].items[indexPath.row]
+        print("DEBUG: Should go to editView of item with name: \(item.title)")
     }
 }
+
+// MARK: - UITableViewDataSource
 
 extension HomeViewController: UITableViewDataSource {
 
@@ -119,27 +142,33 @@ extension HomeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return projects[section].items.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.textColor = Constans.appFontColor
-//        let project = projects[indexPath.row]
-        cell.backgroundColor = .systemRed.withAlphaComponent(1 - (CGFloat(indexPath.row) / CGFloat(tableView.numberOfRows(inSection: indexPath.section))))
-        cell.textLabel?.text = "Cell #\(indexPath.row)"
+        let project = projects[indexPath.section]
+        let item = project.items[indexPath.row]
+        cell.backgroundColor = project.color
+            .withAlphaComponent(1 - (CGFloat(indexPath.row) / CGFloat(tableView.numberOfRows(inSection: indexPath.section))))
+        cell.textLabel?.text = item.title
         return cell
     }
 }
 
+// MARK: - SectionHeaderDelegate
+
 extension HomeViewController: SectionHeaderDelegate {
     func addItemButtonTapped(projectId: NSManagedObjectID) {
         print("DEBUG: HomeViewController should perform addition of item to project with id: \(projectId)")
+        projectService.addItemToProject(projectId: projectId)
     }
-
 }
 
-extension HomeViewController: FooterDelegate {
+// MARK: - SectionFooterDelegate
+
+extension HomeViewController: SectionFooterDelegate {
 
     func editProjectTapped(projectID: NSManagedObjectID) {
         print("DEBUG: HomeViewController should navigate to editview of project with id: \(projectID)")
@@ -147,6 +176,7 @@ extension HomeViewController: FooterDelegate {
 
     func deleteProjectTapped(projectID: NSManagedObjectID) {
         print("DEBUG: HomeViewController should perform deletion of project with id: \(projectID)")
+        projectService.deleteProject(id: projectID)
     }
 }
 

@@ -9,7 +9,7 @@ import CoreData
 import Foundation
 import UIKit
 
-protocol FooterDelegate: AnyObject {
+protocol SectionFooterDelegate: AnyObject {
     func editProjectTapped(projectID: NSManagedObjectID)
     func deleteProjectTapped(projectID: NSManagedObjectID)
 }
@@ -51,7 +51,7 @@ class HomeTableSectionFooterView: UITableViewHeaderFooterView {
 
     private var projectId: NSManagedObjectID? = nil
 
-    weak var delegate: FooterDelegate?
+    weak var delegate: SectionFooterDelegate?
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
