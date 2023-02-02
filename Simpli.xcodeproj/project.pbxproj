@@ -25,6 +25,7 @@
 		1EFCBBD3298BF2B800C2D529 /* HomeTableSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD2298BF2B800C2D529 /* HomeTableSectionFooterView.swift */; };
 		1EFCBBD5298BF37C00C2D529 /* HomeTableSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD4298BF37C00C2D529 /* HomeTableSectionHeaderView.swift */; };
 		1EFCBBD8298BFDBD00C2D529 /* ProjectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD7298BFDBD00C2D529 /* ProjectsService.swift */; };
+		1EFCBBDA298C0EBC00C2D529 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD9298C0EBC00C2D529 /* ItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		1EFCBBD2298BF2B800C2D529 /* HomeTableSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionFooterView.swift; sourceTree = "<group>"; };
 		1EFCBBD4298BF37C00C2D529 /* HomeTableSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionHeaderView.swift; sourceTree = "<group>"; };
 		1EFCBBD7298BFDBD00C2D529 /* ProjectsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsService.swift; sourceTree = "<group>"; };
+		1EFCBBD9298C0EBC00C2D529 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				1EFCBBBC298BE3E200C2D529 /* HomeTableHeaderView.swift */,
 				1EFCBBD2298BF2B800C2D529 /* HomeTableSectionFooterView.swift */,
 				1EFCBBD4298BF37C00C2D529 /* HomeTableSectionHeaderView.swift */,
+				1EFCBBD9298C0EBC00C2D529 /* ItemTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				1EFCBBC8298BEAA700C2D529 /* Project+CoreDataProperties.swift in Sources */,
 				1EFCBBD1298BF0CE00C2D529 /* Item+Extensions.swift in Sources */,
 				1EFCBBB5298BE10700C2D529 /* Constans.swift in Sources */,
+				1EFCBBDA298C0EBC00C2D529 /* ItemTableViewCell.swift in Sources */,
 				1EFCBBD3298BF2B800C2D529 /* HomeTableSectionFooterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

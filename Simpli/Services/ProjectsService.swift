@@ -54,6 +54,8 @@ class ProjectsService {
             let newItem: Item = Item(context: CoreDataManager.shared.viewContext)
             newItem.title = "Item num #\(Int.random(in: 1...5))"
             newItem.project = project
+            newItem.completed = false
+            newItem.priority = Int16.random(in: 1...3)
             applyChanges()
         } else {
             print("DEBUG: Couldn't find project")

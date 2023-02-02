@@ -29,4 +29,8 @@ struct ItemViewModel {
     var id: NSManagedObjectID { item.objectID }
 
     var title: String { item.title ?? "" }
+
+    var priority: Int { Int( item.priority ) }
+
+    var completed: Bool { item.completed }
 }

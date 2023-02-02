@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = Constans.appColor
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: ItemTableViewCell.id)
         tableView.register(HomeTableSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: HomeTableSectionHeaderView.id)
         tableView.register(HomeTableSectionFooterView.self, forHeaderFooterViewReuseIdentifier: HomeTableSectionFooterView.id)
         return tableView
@@ -146,14 +146,18 @@ extension HomeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.textColor = Constans.appFontColor
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.id, for: indexPath) as? ItemTableViewCell else {
+            return UITableViewCell()
+        }
         let project = projects[indexPath.section]
-        let item = project.items[indexPath.row]
-        cell.backgroundColor = project.color
-            .withAlphaComponent(1 - (CGFloat(indexPath.row) / CGFloat(tableView.numberOfRows(inSection: indexPath.section))))
-        cell.textLabel?.text = item.title
+        let bgColor = project.color.withAlphaComponent(backgroundColorResolver(rowIndex: indexPath.row, numberOfRowsInSection: tableView.numberOfRows(inSection: indexPath.section)))
+        let itemVM = project.items[indexPath.row]
+        cell.configure(itemVM: itemVM, bgColor: bgColor)
         return cell
+    }
+
+    func backgroundColorResolver(rowIndex: Int, numberOfRowsInSection: Int) -> CGFloat {
+        1 - ( CGFloat(rowIndex) / CGFloat(numberOfRowsInSection) )
     }
 }
 
