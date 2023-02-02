@@ -14,6 +14,16 @@
 		1EFCBBB5298BE10700C2D529 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBB4298BE10700C2D529 /* Constans.swift */; };
 		1EFCBBBA298BE17400C2D529 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBB9298BE17400C2D529 /* UIViewController+Extensions.swift */; };
 		1EFCBBBD298BE3E200C2D529 /* HomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBBC298BE3E200C2D529 /* HomeTableHeaderView.swift */; };
+		1EFCBBC0298BE8D200C2D529 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBBF298BE8D200C2D529 /* CoreDataManager.swift */; };
+		1EFCBBC4298BE8F800C2D529 /* ProjectModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBC2298BE8F800C2D529 /* ProjectModel.xcdatamodeld */; };
+		1EFCBBC6298BE9D200C2D529 /* UIColorTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBC5298BE9D200C2D529 /* UIColorTransformer.swift */; };
+		1EFCBBC8298BEAA700C2D529 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBC7298BEAA700C2D529 /* Project+CoreDataProperties.swift */; };
+		1EFCBBCB298BEC8700C2D529 /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBCA298BEC8700C2D529 /* ProjectViewModel.swift */; };
+		1EFCBBCD298BEEEA00C2D529 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBCC298BEEEA00C2D529 /* BaseModel.swift */; };
+		1EFCBBCF298BF09600C2D529 /* Project+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBCE298BF09600C2D529 /* Project+Extensions.swift */; };
+		1EFCBBD1298BF0CE00C2D529 /* Item+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD0298BF0CE00C2D529 /* Item+Extensions.swift */; };
+		1EFCBBD3298BF2B800C2D529 /* HomeTableSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD2298BF2B800C2D529 /* HomeTableSectionFooterView.swift */; };
+		1EFCBBD5298BF37C00C2D529 /* HomeTableSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBD4298BF37C00C2D529 /* HomeTableSectionHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +36,16 @@
 		1EFCBBB4298BE10700C2D529 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
 		1EFCBBB9298BE17400C2D529 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1EFCBBBC298BE3E200C2D529 /* HomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableHeaderView.swift; sourceTree = "<group>"; };
+		1EFCBBBF298BE8D200C2D529 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		1EFCBBC3298BE8F800C2D529 /* ProjectModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProjectModel.xcdatamodel; sourceTree = "<group>"; };
+		1EFCBBC5298BE9D200C2D529 /* UIColorTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorTransformer.swift; sourceTree = "<group>"; };
+		1EFCBBC7298BEAA700C2D529 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1EFCBBCA298BEC8700C2D529 /* ProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
+		1EFCBBCC298BEEEA00C2D529 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		1EFCBBCE298BF09600C2D529 /* Project+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Extensions.swift"; sourceTree = "<group>"; };
+		1EFCBBD0298BF0CE00C2D529 /* Item+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+Extensions.swift"; sourceTree = "<group>"; };
+		1EFCBBD2298BF2B800C2D529 /* HomeTableSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionFooterView.swift; sourceTree = "<group>"; };
+		1EFCBBD4298BF37C00C2D529 /* HomeTableSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +78,8 @@
 		1EFCBB9F298BDCA800C2D529 /* Simpli */ = {
 			isa = PBXGroup;
 			children = (
+				1EFCBBC9298BEC8100C2D529 /* ViewModels */,
+				1EFCBBC1298BE8EC00C2D529 /* Models */,
 				1EFCBBBE298BE84300C2D529 /* Managers */,
 				1EFCBBBB298BE3D600C2D529 /* Views */,
 				1EFCBBB7298BE14F00C2D529 /* ViewControllers */,
@@ -75,6 +97,7 @@
 			children = (
 				1EFCBBB8298BE16B00C2D529 /* Extensions */,
 				1EFCBBB4298BE10700C2D529 /* Constans.swift */,
+				1EFCBBC5298BE9D200C2D529 /* UIColorTransformer.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -91,6 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				1EFCBBB9298BE17400C2D529 /* UIViewController+Extensions.swift */,
+				1EFCBBC7298BEAA700C2D529 /* Project+CoreDataProperties.swift */,
+				1EFCBBCE298BF09600C2D529 /* Project+Extensions.swift */,
+				1EFCBBD0298BF0CE00C2D529 /* Item+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -99,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				1EFCBBBC298BE3E200C2D529 /* HomeTableHeaderView.swift */,
+				1EFCBBD2298BF2B800C2D529 /* HomeTableSectionFooterView.swift */,
+				1EFCBBD4298BF37C00C2D529 /* HomeTableSectionHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -106,8 +134,26 @@
 		1EFCBBBE298BE84300C2D529 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				1EFCBBBF298BE8D200C2D529 /* CoreDataManager.swift */,
+				1EFCBBCC298BEEEA00C2D529 /* BaseModel.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		1EFCBBC1298BE8EC00C2D529 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1EFCBBC2298BE8F800C2D529 /* ProjectModel.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1EFCBBC9298BEC8100C2D529 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				1EFCBBCA298BEC8700C2D529 /* ProjectViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,11 +226,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EFCBBC0298BE8D200C2D529 /* CoreDataManager.swift in Sources */,
 				1EFCBBBA298BE17400C2D529 /* UIViewController+Extensions.swift in Sources */,
+				1EFCBBCD298BEEEA00C2D529 /* BaseModel.swift in Sources */,
+				1EFCBBC4298BE8F800C2D529 /* ProjectModel.xcdatamodeld in Sources */,
+				1EFCBBC6298BE9D200C2D529 /* UIColorTransformer.swift in Sources */,
+				1EFCBBCB298BEC8700C2D529 /* ProjectViewModel.swift in Sources */,
 				1EFCBBA5298BDCA800C2D529 /* HomeViewController.swift in Sources */,
+				1EFCBBD5298BF37C00C2D529 /* HomeTableSectionHeaderView.swift in Sources */,
 				1EFCBBBD298BE3E200C2D529 /* HomeTableHeaderView.swift in Sources */,
 				1EFCBBA1298BDCA800C2D529 /* AppDelegate.swift in Sources */,
+				1EFCBBCF298BF09600C2D529 /* Project+Extensions.swift in Sources */,
+				1EFCBBC8298BEAA700C2D529 /* Project+CoreDataProperties.swift in Sources */,
+				1EFCBBD1298BF0CE00C2D529 /* Item+Extensions.swift in Sources */,
 				1EFCBBB5298BE10700C2D529 /* Constans.swift in Sources */,
+				1EFCBBD3298BF2B800C2D529 /* HomeTableSectionFooterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +452,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1EFCBBC2298BE8F800C2D529 /* ProjectModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1EFCBBC3298BE8F800C2D529 /* ProjectModel.xcdatamodel */,
+			);
+			currentVersion = 1EFCBBC3298BE8F800C2D529 /* ProjectModel.xcdatamodel */;
+			path = ProjectModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1EFCBB95298BDCA800C2D529 /* Project object */;
 }
