@@ -104,6 +104,7 @@ extension HomeViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let item = projects[indexPath.section].items[indexPath.row]
         print("DEBUG: Should go to editView of item with name: \(item.title)")
+        projectService.switchItemCompletion(itemId: item.id)
     }
 }
 
@@ -123,6 +124,8 @@ extension HomeViewController: UITableViewDataSource {
         header.configure(projectVM: projects[section])
         return header
     }
+
+
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: HomeTableSectionFooterView.id) as? HomeTableSectionFooterView else {

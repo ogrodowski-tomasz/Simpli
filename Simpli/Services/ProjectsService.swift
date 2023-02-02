@@ -31,7 +31,9 @@ class ProjectsService {
     func addProject() {
         let newProject = Project(context: CoreDataManager.shared.viewContext)
         newProject.title = "New Project"
-        newProject.color = UIColor.systemTeal
+        newProject.color = UIColor.systemPurple
+        newProject.dateCreated = Date()
+        newProject.closed = false
         applyChanges()
     }
 
@@ -59,6 +61,15 @@ class ProjectsService {
             applyChanges()
         } else {
             print("DEBUG: Couldn't find project")
+        }
+    }
+
+    func switchItemCompletion(itemId: NSManagedObjectID) {
+        if let item = Item.byId(id: itemId) as? Item {
+            item.completed.toggle()
+            applyChanges()
+        } else {
+            print("DEBUG: Cannot find this item in db")
         }
     }
 

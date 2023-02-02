@@ -60,9 +60,9 @@ class ItemTableViewCell: UITableViewCell {
         addSubview(completedImage)
 
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
+            stackView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 2.5),
             stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
-            bottomAnchor.constraint(equalToSystemSpacingBelow: stackView.bottomAnchor, multiplier: 1),
+            bottomAnchor.constraint(equalToSystemSpacingBelow: stackView.bottomAnchor, multiplier: 2.5),
             completedImage.leadingAnchor.constraint(equalToSystemSpacingAfter: stackView.trailingAnchor, multiplier: 1),
 
             completedImage.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
@@ -77,7 +77,7 @@ class ItemTableViewCell: UITableViewCell {
             priorityText.append("⭐️")
         }
         priorityLabel.text = priorityText
-        completedImage.isHidden = itemVM.completed
+        completedImage.isHidden = !itemVM.completed
         backgroundColor = bgColor
     }
 
