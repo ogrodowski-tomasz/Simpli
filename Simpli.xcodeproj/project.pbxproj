@@ -13,6 +13,7 @@
 		1EFCBBAD298BDCA900C2D529 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EFCBBAB298BDCA900C2D529 /* LaunchScreen.storyboard */; };
 		1EFCBBB5298BE10700C2D529 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBB4298BE10700C2D529 /* Constans.swift */; };
 		1EFCBBBA298BE17400C2D529 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBB9298BE17400C2D529 /* UIViewController+Extensions.swift */; };
+		1EFCBBBD298BE3E200C2D529 /* HomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBBC298BE3E200C2D529 /* HomeTableHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		1EFCBBAE298BDCA900C2D529 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EFCBBB4298BE10700C2D529 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
 		1EFCBBB9298BE17400C2D529 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		1EFCBBBC298BE3E200C2D529 /* HomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		1EFCBB9F298BDCA800C2D529 /* Simpli */ = {
 			isa = PBXGroup;
 			children = (
+				1EFCBBBB298BE3D600C2D529 /* Views */,
 				1EFCBBB7298BE14F00C2D529 /* ViewControllers */,
 				1EFCBBB6298BE13C00C2D529 /* Utils */,
 				1EFCBBA0298BDCA800C2D529 /* AppDelegate.swift */,
@@ -89,6 +92,14 @@
 				1EFCBBB9298BE17400C2D529 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1EFCBBBB298BE3D600C2D529 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1EFCBBBC298BE3E200C2D529 /* HomeTableHeaderView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +174,7 @@
 			files = (
 				1EFCBBBA298BE17400C2D529 /* UIViewController+Extensions.swift in Sources */,
 				1EFCBBA5298BDCA800C2D529 /* HomeViewController.swift in Sources */,
+				1EFCBBBD298BE3E200C2D529 /* HomeTableHeaderView.swift in Sources */,
 				1EFCBBA1298BDCA800C2D529 /* AppDelegate.swift in Sources */,
 				1EFCBBB5298BE10700C2D529 /* Constans.swift in Sources */,
 			);

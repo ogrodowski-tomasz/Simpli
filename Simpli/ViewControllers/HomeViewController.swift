@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    private let tableHeader = HomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: HomeTableHeaderView.height + 50))
+
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,6 +30,7 @@ class HomeViewController: UIViewController {
     private func setup() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.tableHeaderView = tableHeader
     }
 
     private func layout() {
