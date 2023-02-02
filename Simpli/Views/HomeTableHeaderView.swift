@@ -27,6 +27,7 @@ class HomeTableHeaderView: UIView {
         layout.itemSize = CGSize(width: 200, height: HomeTableHeaderView.height)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = Constans.appColor
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
 
         return collectionView
@@ -82,6 +83,8 @@ extension HomeTableHeaderView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         cell.backgroundColor = Constans.appFontColor
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
         return cell
     }
 }
