@@ -58,6 +58,7 @@
 		1EFCBB9F298BDCA800C2D529 /* Simpli */ = {
 			isa = PBXGroup;
 			children = (
+				1EFCBBBE298BE84300C2D529 /* Managers */,
 				1EFCBBBB298BE3D600C2D529 /* Views */,
 				1EFCBBB7298BE14F00C2D529 /* ViewControllers */,
 				1EFCBBB6298BE13C00C2D529 /* Utils */,
@@ -100,6 +101,13 @@
 				1EFCBBBC298BE3E200C2D529 /* HomeTableHeaderView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1EFCBBBE298BE84300C2D529 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

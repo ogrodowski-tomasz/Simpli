@@ -22,12 +22,21 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constans.appColor
-        setTitle("Simpli", andImage: UIImage(systemName: "figure.wave.circle.fill")!)
-        setup()
+
+        setupNavigationBar()
+        setupTableView()
         layout()
     }
 
-    private func setup() {
+    private func setupNavigationBar() {
+        setTitle("Simpli", andImage: UIImage(systemName: "figure.wave.circle.fill")!)
+        let rightButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusButtonTapped))
+        rightButton.tintColor = Constans.appFontColor
+
+        navigationItem.setRightBarButton(rightButton, animated: true)
+    }
+
+    private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableHeaderView = tableHeader
@@ -41,6 +50,11 @@ class HomeViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: 0),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: tableView.trailingAnchor, multiplier: 0)
         ])
+    }
+
+    @objc
+    private func plusButtonTapped() {
+        print("DEBUG: plus tapped")
     }
 
 }
