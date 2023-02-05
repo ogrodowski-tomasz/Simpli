@@ -8,9 +8,19 @@
 import Foundation
 import UIKit
 
+protocol HotItemCellDelegate: AnyObject {
+    func didSelectHotItem(item: ItemViewModel)
+}
+
 class HomeTableHeaderView: UIView {
 
     static let height: CGFloat = 100
+
+    private var hotItems: [ItemViewModel] = [] {
+        didSet { collectionView.reloadData() }
+    }
+
+    weak var delegate: HotItemCellDelegate?
 
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -27,8 +37,9 @@ class HomeTableHeaderView: UIView {
         layout.itemSize = CGSize(width: 200, height: HomeTableHeaderView.height)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = Constans.appColor
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(HotItemCollectionViewCell.self, forCellWithReuseIdentifier: HotItemCollectionViewCell.id)
 
         return collectionView
     }()
@@ -66,25 +77,30 @@ class HomeTableHeaderView: UIView {
         ])
     }
 
+    func configure(hotItems: [ItemViewModel]) {
+        self.hotItems = hotItems
+    }
+
 }
 
 extension HomeTableHeaderView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        delegate?.didSelectHotItem(item: hotItems[indexPath.row])
     }
 }
 
 extension HomeTableHeaderView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return hotItems.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = Constans.appFontColor
-        cell.layer.cornerRadius = 10
-        cell.layer.masksToBounds = true
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotItemCollectionViewCell.id, for: indexPath) as? HotItemCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.configure(item: hotItems[indexPath.row])
         return cell
     }
 }

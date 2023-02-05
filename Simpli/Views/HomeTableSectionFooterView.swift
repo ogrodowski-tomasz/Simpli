@@ -76,11 +76,12 @@ class HomeTableSectionFooterView: UITableViewHeaderFooterView {
 
         NSLayoutConstraint.activate([
             deleteButton.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
-            bottomAnchor.constraint(equalToSystemSpacingBelow: deleteButton.bottomAnchor, multiplier: 1),
+            deleteButton.heightAnchor.constraint(equalToConstant: 50),
             deleteButton.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
             editButton.leadingAnchor.constraint(equalToSystemSpacingAfter: deleteButton.trailingAnchor, multiplier: 1),
 
             editButton.widthAnchor.constraint(equalTo: deleteButton.widthAnchor, constant: 0),
+            editButton.heightAnchor.constraint(equalTo: deleteButton.heightAnchor, constant: 0),
 
             editButton.centerYAnchor.constraint(equalTo: deleteButton.centerYAnchor),
             trailingAnchor.constraint(equalToSystemSpacingAfter: editButton.trailingAnchor, multiplier: 1)

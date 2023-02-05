@@ -49,4 +49,6 @@ struct ItemViewModel {
     var priority: ItemPriority { ItemPriority(rawValue: item.priority) ?? ItemPriority.low }
 
     var completed: Bool { item.completed }
+
+    var color: UIColor { item.project?.color ?? .white }
 }

@@ -32,6 +32,7 @@ class EditItemViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "<Item title here>"
         label.textColor = Constans.appFontColor
+        label.numberOfLines = 0
         label.textAlignment = .center
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         return label
@@ -70,7 +71,7 @@ class EditItemViewController: UIViewController {
         control.backgroundColor = controlColor.withAlphaComponent(0.25)
         control.selectedSegmentTintColor = controlColor.withAlphaComponent(0.5)
         ItemPriority.allCases.forEach { priorityLevel in
-            control.insertSegment(withTitle: priorityLevel.desctiption, at: Int(priorityLevel.rawValue), animated: true)
+            control.insertSegment(withTitle: priorityLevel.description, at: Int(priorityLevel.rawValue), animated: true)
         }
         return control
     }()

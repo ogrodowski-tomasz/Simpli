@@ -12,7 +12,7 @@ enum ItemPriority: Int16, CaseIterable {
     case medium = 1
     case high = 2
 
-    var desctiption: String {
+    var description: String {
         switch self {
         case .low: return "⭐️"
         case .medium: return "⭐️⭐️"

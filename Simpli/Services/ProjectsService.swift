@@ -13,9 +13,11 @@ import UIKit
 class ProjectsService {
 
     let subject = CurrentValueSubject<[ProjectViewModel], Error>([])
+    let hotItemsSubject = CurrentValueSubject<[ItemViewModel], Error>([])
 
     init() {
         fetchProjects()
+        fetchHotItems()
     }
 
     private func fetchProjects() {
@@ -26,6 +28,11 @@ class ProjectsService {
         } catch {
             print("DEBUG: Error fetching project: \(error)")
         }
+    }
+
+    private func fetchHotItems() {
+        let hotItems = Item.getTop10().map(ItemViewModel.init)
+        hotItemsSubject.send(hotItems)
     }
 
     func addProject() {
@@ -40,6 +47,7 @@ class ProjectsService {
     func applyChanges() {
         try? CoreDataManager.shared.viewContext.save()
         fetchProjects()
+        fetchHotItems()
     }
 
     func deleteProject(id: NSManagedObjectID) {
@@ -100,7 +108,7 @@ class ProjectsService {
             if item.completed != newCompletionStatus {
                 item.completed = newCompletionStatus
                 item.completionDate = Date()
-            } 
+            }
             applyChanges()
         } else {
             print("DEBUG: Cannot find this item")

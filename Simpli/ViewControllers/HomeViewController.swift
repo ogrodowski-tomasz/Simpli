@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
 
     // MARK: - View Components
 
-    private let tableHeader = HomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: HomeTableHeaderView.height + 50))
+    private let tableHeader = HomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: HomeTableHeaderView.height + 100))
 
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -34,6 +34,10 @@ class HomeViewController: UIViewController {
         didSet { tableView.reloadData() }
     }
 
+    private var hotItems = [ItemViewModel]() {
+        didSet { tableHeader.configure(hotItems: hotItems) }
+    }
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -43,6 +47,7 @@ class HomeViewController: UIViewController {
         setupTableView()
         layout()
         setupProjectSubscription()
+        setupHotItemsSubscription()
     }
 
     // MARK: - Methods
@@ -59,6 +64,7 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableHeaderView = tableHeader
+        tableHeader.delegate = self
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = Constans.appColor
         navigationController?.navigationBar.standardAppearance = appearance
@@ -92,6 +98,28 @@ class HomeViewController: UIViewController {
             .store(in: &cancellables)
     }
 
+    private func setupHotItemsSubscription() {
+        projectService.hotItemsSubject
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("DEBUG: Subscription finished successfully")
+                case .failure(let error):
+                    print("DEBUG: Subscription finished with failure: \(error)")
+                }
+            } receiveValue: { [weak self] fetchedHotItems in
+                self?.hotItems = fetchedHotItems
+            }
+            .store(in: &cancellables)
+
+    }
+
+    private func navigateToEditItemView(item: ItemViewModel) {
+        let editItemVC = EditItemViewController(item: item)
+        editItemVC.delegate = self
+        navigationController?.pushViewController(editItemVC, animated: true)
+    }
+
     // MARK: - Selectors
 
     @objc
@@ -109,9 +137,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let item = projects[indexPath.section].items[indexPath.row]
-        let editItemVC = EditItemViewController(item: item)
-        editItemVC.delegate = self
-        navigationController?.pushViewController(editItemVC, animated: true)
+        navigateToEditItemView(item: item)
     }
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -171,7 +197,7 @@ extension HomeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 50
+        return 90
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -234,5 +260,11 @@ extension HomeViewController: EditProjectViewDelegate {
 extension HomeViewController: EditItemDelegate {
     func updateItem(id: NSManagedObjectID, newName: String, newPriority: Int, newCompletionStatus: Bool) {
         projectService.updateItem(id: id, newName: newName, newPriority: newPriority, newCompletionStatus: newCompletionStatus)
+    }
+}
+
+extension HomeViewController: HotItemCellDelegate {
+    func didSelectHotItem(item: ItemViewModel) {
+        navigateToEditItemView(item: item)
     }
 }

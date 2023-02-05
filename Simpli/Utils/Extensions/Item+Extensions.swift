@@ -21,4 +21,18 @@ extension Item: BaseModel {
         }
     }
 
+    static func getTop10() -> [Item] {
+        let request = Item.fetchRequest()
+        request.predicate = NSPredicate(format: "%K = false", #keyPath(Item.completed))
+        request.fetchLimit = 10
+        do {
+            let fetcheditems = try Item.viewContext.fetch(request)
+            print("DEBUG: Fetched \(fetcheditems.count) items")
+            return fetcheditems
+        } catch {
+            print("DEBUG: Failed to fetch top10 items: \(error)")
+            return []
+        }
+    }
+
 }

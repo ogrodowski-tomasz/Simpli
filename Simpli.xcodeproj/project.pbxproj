@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E9EAB65298FD53900627137 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9EAB64298FD53900627137 /* EditItemViewController.swift */; };
 		1E9EAB67298FD6D600627137 /* ItemPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9EAB66298FD6D600627137 /* ItemPriority.swift */; };
+		1EA9091D29906D620011E1E8 /* HotItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA9091C29906D620011E1E8 /* HotItemCollectionViewCell.swift */; };
 		1EFCBBA1298BDCA800C2D529 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBA0298BDCA800C2D529 /* AppDelegate.swift */; };
 		1EFCBBA5298BDCA800C2D529 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCBBA4298BDCA800C2D529 /* HomeViewController.swift */; };
 		1EFCBBAA298BDCA900C2D529 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EFCBBA9298BDCA900C2D529 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		1E9EAB64298FD53900627137 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		1E9EAB66298FD6D600627137 /* ItemPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPriority.swift; sourceTree = "<group>"; };
+		1EA9091C29906D620011E1E8 /* HotItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EFCBB9D298BDCA800C2D529 /* Simpli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simpli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EFCBBA0298BDCA800C2D529 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EFCBBA4298BDCA800C2D529 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				1EFCBBD2298BF2B800C2D529 /* HomeTableSectionFooterView.swift */,
 				1EFCBBD4298BF37C00C2D529 /* HomeTableSectionHeaderView.swift */,
 				1EFCBBD9298C0EBC00C2D529 /* ItemTableViewCell.swift */,
+				1EA9091C29906D620011E1E8 /* HotItemCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				1EFCBBD8298BFDBD00C2D529 /* ProjectsService.swift in Sources */,
 				1EFCBBC8298BEAA700C2D529 /* Project+CoreDataProperties.swift in Sources */,
 				1EFCBBD1298BF0CE00C2D529 /* Item+Extensions.swift in Sources */,
+				1EA9091D29906D620011E1E8 /* HotItemCollectionViewCell.swift in Sources */,
 				1EFCBBB5298BE10700C2D529 /* Constans.swift in Sources */,
 				1EFCBBDA298C0EBC00C2D529 /* ItemTableViewCell.swift in Sources */,
 				1EFCBBDC298C253F00C2D529 /* EditProjectViewController.swift in Sources */,
