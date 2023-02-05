@@ -23,8 +23,8 @@ class ProjectsService {
         do {
             let projects: [Project] = try CoreDataManager.shared.viewContext.fetch(request)
             subject.send(projects.map(ProjectViewModel.init))
-        } catch  {
-            print("DEBUG: error")
+        } catch {
+            print("DEBUG: Error fetching project: \(error)")
         }
     }
 
@@ -47,20 +47,20 @@ class ProjectsService {
             project.delete()
             applyChanges()
         } else {
-            print("DEBUG: Cannot find this project in database")
+            print("DEBUG: Cannot find this project")
         }
     }
 
     func addItemToProject(projectId: NSManagedObjectID) {
         if let project = Project.byId(id: projectId) as? Project {
             let newItem: Item = Item(context: CoreDataManager.shared.viewContext)
-            newItem.title = "Item num #\(Int.random(in: 1...5))"
+            newItem.title = "New Item"
             newItem.project = project
             newItem.completed = false
-            newItem.priority = Int16.random(in: 1...3)
+            newItem.priority = Int16.random(in: 0..<3)
             applyChanges()
         } else {
-            print("DEBUG: Couldn't find project")
+            print("DEBUG: Cannot find project")
         }
     }
 
@@ -87,6 +87,20 @@ class ProjectsService {
     func deleteItem(id: NSManagedObjectID) {
         if let item = Item.byId(id: id) as? Item {
             item.delete()
+            applyChanges()
+        } else {
+            print("DEBUG: Cannot find this item")
+        }
+    }
+
+    func updateItem(id: NSManagedObjectID, newName: String, newPriority: Int, newCompletionStatus: Bool) {
+        if let item = Item.byId(id: id) as? Item {
+            item.title = newName
+            item.priority = Int16(newPriority)
+            if item.completed != newCompletionStatus {
+                item.completed = newCompletionStatus
+                item.completionDate = Date()
+            } 
             applyChanges()
         } else {
             print("DEBUG: Cannot find this item")

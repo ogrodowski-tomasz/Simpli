@@ -72,11 +72,7 @@ class ItemTableViewCell: UITableViewCell {
 
     func configure(itemVM: ItemViewModel, bgColor: UIColor) {
         titleLabel.text = itemVM.title
-        var priorityText = ""
-        for _ in 0..<itemVM.priority {
-            priorityText.append("⭐️")
-        }
-        priorityLabel.text = priorityText
+        priorityLabel.text = itemVM.priority.desctiption
         completedImage.isHidden = !itemVM.completed
         backgroundColor = bgColor
     }

@@ -107,10 +107,11 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
         let item = projects[indexPath.section].items[indexPath.row]
-        print("DEBUG: Should go to editView of item with name: \(item.title)")
-        projectService.switchItemCompletion(itemId: item.id)
+        let editItemVC = EditItemViewController(item: item)
+        editItemVC.delegate = self
+        navigationController?.pushViewController(editItemVC, animated: true)
     }
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -182,13 +183,18 @@ extension HomeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let project = projects[indexPath.section]
-        let bgColor = project.color.withAlphaComponent(backgroundColorResolver(rowIndex: indexPath.row, numberOfRowsInSection: tableView.numberOfRows(inSection: indexPath.section)))
+        let bgColor = project.color.withAlphaComponent(
+            backgroundColorOpacityResolver(
+                rowIndex: indexPath.row,
+                numberOfRowsInSection: tableView.numberOfRows(inSection: indexPath.section)
+            )
+        )
         let itemVM = project.items[indexPath.row]
         cell.configure(itemVM: itemVM, bgColor: bgColor)
         return cell
     }
 
-    func backgroundColorResolver(rowIndex: Int, numberOfRowsInSection: Int) -> CGFloat {
+    func backgroundColorOpacityResolver(rowIndex: Int, numberOfRowsInSection: Int) -> CGFloat {
         1 - ( CGFloat(rowIndex) / CGFloat(numberOfRowsInSection) )
     }
 }
@@ -197,7 +203,6 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: SectionHeaderDelegate {
     func addItemButtonTapped(projectId: NSManagedObjectID) {
-        print("DEBUG: HomeViewController should perform addition of item to project with id: \(projectId)")
         projectService.addItemToProject(projectId: projectId)
     }
 }
@@ -207,20 +212,27 @@ extension HomeViewController: SectionHeaderDelegate {
 extension HomeViewController: SectionFooterDelegate {
 
     func editProjectTapped(project: ProjectViewModel) {
-        print("DEBUG: HomeViewController should navigate to editview of project with id: \(project.id)")
         let editProjectVc = EditProjectViewController(project: project)
         editProjectVc.delegate = self
         navigationController?.pushViewController(editProjectVc, animated: true)
     }
 
     func deleteProjectTapped(project: ProjectViewModel) {
-        print("DEBUG: HomeViewController should perform deletion of project with id: \(project.id)")
         projectService.deleteProject(id: project.id)
     }
 }
 
+// MARK: - EditProjectViewDelegate
 extension HomeViewController: EditProjectViewDelegate {
     func updateProject(projectID: NSManagedObjectID, newName: String, newClosedStatus: Bool, newColor: UIColor) {
         projectService.updateProject(projectID: projectID, newName: newName, newClosedStatus: newClosedStatus, newColor: newColor)
+    }
+}
+
+// MARK: - EditItemDelegate
+
+extension HomeViewController: EditItemDelegate {
+    func updateItem(id: NSManagedObjectID, newName: String, newPriority: Int, newCompletionStatus: Bool) {
+        projectService.updateItem(id: id, newName: newName, newPriority: newPriority, newCompletionStatus: newCompletionStatus)
     }
 }

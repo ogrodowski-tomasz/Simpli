@@ -46,7 +46,7 @@ struct ItemViewModel {
 
     var title: String { item.title ?? "" }
 
-    var priority: Int { Int( item.priority ) }
+    var priority: ItemPriority { ItemPriority(rawValue: item.priority) ?? ItemPriority.low }
 
     var completed: Bool { item.completed }
 }
