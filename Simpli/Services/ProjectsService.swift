@@ -73,4 +73,15 @@ class ProjectsService {
         }
     }
 
+    func updateProject(projectID: NSManagedObjectID, newName: String, newClosedStatus: Bool, newColor: UIColor) {
+        if let project = Project.byId(id: projectID) as? Project {
+            project.color = newColor
+            project.title = newName
+            project.closed = newClosedStatus
+            applyChanges()
+        } else {
+            print("DEBUG: Project not found")
+        }
+    }
+
 }

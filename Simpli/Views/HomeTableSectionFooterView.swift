@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol SectionFooterDelegate: AnyObject {
-    func editProjectTapped(projectID: NSManagedObjectID)
-    func deleteProjectTapped(projectID: NSManagedObjectID)
+    func editProjectTapped(project: ProjectViewModel)
+    func deleteProjectTapped(project: ProjectViewModel)
 }
 
 class HomeTableSectionFooterView: UITableViewHeaderFooterView {
@@ -49,7 +49,8 @@ class HomeTableSectionFooterView: UITableViewHeaderFooterView {
         return button
     }()
 
-    private var projectId: NSManagedObjectID? = nil
+
+    private var project: ProjectViewModel? = nil
 
     weak var delegate: SectionFooterDelegate?
 
@@ -86,21 +87,21 @@ class HomeTableSectionFooterView: UITableViewHeaderFooterView {
         ])
     }
 
-    func configure(id: NSManagedObjectID) {
-        projectId = id
+    func configure(project: ProjectViewModel) {
+        self.project = project
     }
 
     @objc
     private func editButtonTapped() {
         print("DEBUG: Edit button tapped in footer")
-        guard let projectId = projectId else { return }
-        delegate?.editProjectTapped(projectID: projectId)
+        guard let project = project else { return }
+        delegate?.editProjectTapped(project: project)
     }
 
     @objc
     private func deleteButtonTapped() {
         print("DEBUG: Delete button tapped in footer")
-        guard let projectId = projectId else { return }
-        delegate?.deleteProjectTapped(projectID: projectId)
+        guard let project = project else { return }
+        delegate?.deleteProjectTapped(project: project)
     }
 }

@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     private let tableHeader = HomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: HomeTableHeaderView.height + 50))
 
     private let tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = Constans.appColor
         tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: ItemTableViewCell.id)
@@ -59,15 +59,20 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableHeaderView = tableHeader
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = Constans.appColor
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
 
     private func layout() {
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 0),
-            tableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0),
-            tableView.bottomAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: 0),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: tableView.trailingAnchor, multiplier: 0)
+            tableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 0),
+            tableView.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: 0),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: tableView.trailingAnchor, multiplier: 0)
         ])
     }
 
@@ -122,17 +127,16 @@ extension HomeViewController: UITableViewDataSource {
         }
         header.delegate = self
         header.configure(projectVM: projects[section])
+
         return header
     }
-
-
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: HomeTableSectionFooterView.id) as? HomeTableSectionFooterView else {
             return UIView()
         }
         footer.delegate = self
-        footer.configure(id: projects[section].id)
+        footer.configure(project: projects[section])
         return footer
     }
 
@@ -177,14 +181,21 @@ extension HomeViewController: SectionHeaderDelegate {
 
 extension HomeViewController: SectionFooterDelegate {
 
-    func editProjectTapped(projectID: NSManagedObjectID) {
-        print("DEBUG: HomeViewController should navigate to editview of project with id: \(projectID)")
+    func editProjectTapped(project: ProjectViewModel) {
+        print("DEBUG: HomeViewController should navigate to editview of project with id: \(project.id)")
+        let editProjectVc = EditProjectViewController(project: project)
+        editProjectVc.delegate = self
+        navigationController?.pushViewController(editProjectVc, animated: true)
     }
 
-    func deleteProjectTapped(projectID: NSManagedObjectID) {
-        print("DEBUG: HomeViewController should perform deletion of project with id: \(projectID)")
-        projectService.deleteProject(id: projectID)
+    func deleteProjectTapped(project: ProjectViewModel) {
+        print("DEBUG: HomeViewController should perform deletion of project with id: \(project.id)")
+        projectService.deleteProject(id: project.id)
     }
 }
 
-
+extension HomeViewController: EditProjectViewDelegate {
+    func updateProject(projectID: NSManagedObjectID, newName: String, newClosedStatus: Bool, newColor: UIColor) {
+        projectService.updateProject(projectID: projectID, newName: newName, newClosedStatus: newClosedStatus, newColor: newColor)
+    }
+}

@@ -32,6 +32,15 @@ class HomeTableSectionHeaderView: UITableViewHeaderFooterView {
         return button
     }()
 
+    private let progressBar: UIProgressView = {
+        let progressView = UIProgressView(progressViewStyle: .bar)
+        let leadingPadding: CGFloat = 8
+        progressView.frame = CGRect(x: leadingPadding, y: 40, width: UIScreen.main.bounds.width - (2*leadingPadding), height: 10)
+        progressView.backgroundColor = .clear
+        progressView.trackTintColor = .secondaryLabel
+        return progressView
+    }()
+
     weak var delegate: SectionHeaderDelegate?
 
     override init(reuseIdentifier: String?) {
@@ -48,6 +57,8 @@ class HomeTableSectionHeaderView: UITableViewHeaderFooterView {
         didSet {
             if let projectVM {
                 titleLabel.text = projectVM.title
+                progressBar.progressTintColor = projectVM.color
+                progressBar.setProgress(projectVM.completionStatus, animated: true)
             }
         }
     }
@@ -59,16 +70,14 @@ class HomeTableSectionHeaderView: UITableViewHeaderFooterView {
     private func layout() {
         addSubview(titleLabel)
         addSubview(addItemButton)
+        addSubview(progressBar)
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
             titleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
             addItemButton.leadingAnchor.constraint(equalToSystemSpacingAfter: titleLabel.trailingAnchor, multiplier: 1),
-            bottomAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 1),
-
-
+            trailingAnchor.constraint(equalToSystemSpacingAfter: addItemButton.trailingAnchor, multiplier: 1),
             addItemButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: addItemButton.trailingAnchor, multiplier: 1)
         ])
     }
 

@@ -21,6 +21,22 @@ struct ProjectViewModel {
     var items: [ItemViewModel] {
         Item.getItems(projectId: project.objectID).map(ItemViewModel.init)
     }
+
+    var completionStatus: Float {
+        var itemsCompleted = 0
+        if items.count == 0 {
+            return 0
+        }
+        for item in items {
+            if item.completed {
+                itemsCompleted += 1
+            }
+        }
+
+        return Float(itemsCompleted) / Float(items.count)
+    }
+
+    var closed: Bool { project.closed }
 }
 
 struct ItemViewModel {
