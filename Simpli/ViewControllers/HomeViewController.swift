@@ -105,11 +105,36 @@ class HomeViewController: UIViewController {
 // MARK: - UITableViewDelegate
 
 extension HomeViewController: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let item = projects[indexPath.section].items[indexPath.row]
         print("DEBUG: Should go to editView of item with name: \(item.title)")
         projectService.switchItemCompletion(itemId: item.id)
+    }
+
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let updateItemCompletionAction = UIContextualAction(style: .normal, title: "Switch Completion") { action, sourceView, completionHandler in
+            let item = self.projects[indexPath.section].items[indexPath.row]
+            self.projectService.switchItemCompletion(itemId: item.id)
+            completionHandler(true)
+        }
+        updateItemCompletionAction.backgroundColor = .systemGreen
+        updateItemCompletionAction.image = UIImage(systemName: "checkmark")
+
+        let swipeAction = UISwipeActionsConfiguration(actions: [updateItemCompletionAction])
+
+        return swipeAction
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteItemAction = UIContextualAction(style: .destructive, title: "Delete") { action, sourceView, completionHandler in
+            let item = self.projects[indexPath.section].items[indexPath.row]
+            self.projectService.deleteItem(id: item.id)
+            completionHandler(true)
+        }
+        let swipeAction = UISwipeActionsConfiguration(actions: [deleteItemAction])
+        return swipeAction
     }
 }
 

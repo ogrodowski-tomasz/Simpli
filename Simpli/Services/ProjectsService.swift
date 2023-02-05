@@ -84,4 +84,13 @@ class ProjectsService {
         }
     }
 
+    func deleteItem(id: NSManagedObjectID) {
+        if let item = Item.byId(id: id) as? Item {
+            item.delete()
+            applyChanges()
+        } else {
+            print("DEBUG: Cannot find this item")
+        }
+    }
+
 }
