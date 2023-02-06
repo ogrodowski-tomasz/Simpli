@@ -12,7 +12,6 @@ extension Project: BaseModel {
 
     static var all: NSFetchRequest<Project> {
         let request = Project.fetchRequest()
-
         return request
     }
 

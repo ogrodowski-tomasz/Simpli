@@ -8,11 +8,15 @@
 import Foundation
 import UIKit
 
+
+/// Hot item selection propagator
 protocol HotItemCellDelegate: AnyObject {
     func didSelectHotItem(item: ItemViewModel)
 }
 
 class HomeTableHeaderView: UIView {
+
+    // MARK: - Properties
 
     static let height: CGFloat = 100
 
@@ -21,6 +25,8 @@ class HomeTableHeaderView: UIView {
     }
 
     weak var delegate: HotItemCellDelegate?
+
+    // MARK: - View Components
 
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -40,9 +46,10 @@ class HomeTableHeaderView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = Constans.appColor
         collectionView.register(HotItemCollectionViewCell.self, forCellWithReuseIdentifier: HotItemCollectionViewCell.id)
-
         return collectionView
     }()
+
+    // MARK: - Life cycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,6 +60,8 @@ class HomeTableHeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+
+    // MARK: - Helpers
 
     private func setup() {
         collectionView.delegate = self
@@ -81,7 +90,11 @@ class HomeTableHeaderView: UIView {
         self.hotItems = hotItems
     }
 
+    // MARK: - Selectors
+
 }
+
+// MARK: - UICollectionViewDelegate
 
 extension HomeTableHeaderView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -89,6 +102,8 @@ extension HomeTableHeaderView: UICollectionViewDelegate {
         delegate?.didSelectHotItem(item: hotItems[indexPath.row])
     }
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension HomeTableHeaderView: UICollectionViewDataSource {
 

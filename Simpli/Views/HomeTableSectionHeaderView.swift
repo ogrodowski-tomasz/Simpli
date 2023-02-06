@@ -9,12 +9,24 @@ import CoreData
 import Foundation
 import UIKit
 
+/// Header actions propagator
 protocol SectionHeaderDelegate: AnyObject {
     func addItemButtonTapped(projectId: NSManagedObjectID)
 }
 
 class HomeTableSectionHeaderView: UITableViewHeaderFooterView {
+
+    // MARK: - Properties
+
     static let id = "HomeTableSectionHeaderView"
+
+    weak var delegate: SectionHeaderDelegate?
+
+    private var projectVM: ProjectViewModel? = nil {
+        didSet { setupViewComponentsInitialValues() }
+    }
+
+    // MARK: - View Components
 
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -41,7 +53,7 @@ class HomeTableSectionHeaderView: UITableViewHeaderFooterView {
         return progressView
     }()
 
-    weak var delegate: SectionHeaderDelegate?
+    // MARK: - Life cycle
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -53,18 +65,17 @@ class HomeTableSectionHeaderView: UITableViewHeaderFooterView {
         fatalError()
     }
 
-    private var projectVM: ProjectViewModel? = nil {
-        didSet {
-            if let projectVM {
-                titleLabel.text = projectVM.title
-                progressBar.progressTintColor = projectVM.color
-                progressBar.setProgress(projectVM.completionStatus, animated: true)
-            }
-        }
-    }
+    // MARK: - Helpers
 
     private func setup() {
         addItemButton.addTarget(self, action: #selector(addItemButtonTapped), for: .touchUpInside)
+    }
+
+    private func setupViewComponentsInitialValues() {
+        guard let projectVM = projectVM else { return }
+        titleLabel.text = projectVM.title
+        progressBar.progressTintColor = projectVM.color
+        progressBar.setProgress(projectVM.completionStatus, animated: true)
     }
 
     private func layout() {
@@ -86,13 +97,17 @@ class HomeTableSectionHeaderView: UITableViewHeaderFooterView {
         titleLabel.text = nil
     }
 
+
+    /// Inject ProjectViewModel to HomeTableSectionHeaderView
+    /// - Parameter projectVM: ProjectViewModel of this header
     func configure(projectVM: ProjectViewModel) {
         self.projectVM = projectVM
     }
 
+    // MARK: - Selectors
+
     @objc
     private func addItemButtonTapped() {
-        print("DEBUG: Add item button tapped in HomeTableSectionHeaderView")
         guard let projectId = projectVM?.id else { return }
         delegate?.addItemButtonTapped(projectId: projectId)
     }

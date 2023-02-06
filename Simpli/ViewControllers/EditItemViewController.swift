@@ -9,6 +9,7 @@ import CoreData
 import Foundation
 import UIKit
 
+/// Updated Item's information propagator
 protocol EditItemDelegate: AnyObject {
     func updateItem(id: NSManagedObjectID, newName: String, newPriority: Int, newCompletionStatus: Bool)
 }
@@ -16,6 +17,7 @@ protocol EditItemDelegate: AnyObject {
 class EditItemViewController: UIViewController {
 
     // MARK: - Properties
+
     private let item: ItemViewModel
 
     private var newPriority = 0
@@ -26,7 +28,6 @@ class EditItemViewController: UIViewController {
 
     // MARK: - View Components
 
-    // Title
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +53,6 @@ class EditItemViewController: UIViewController {
         return txtField
     }()
 
-    // Priority segmented picker
     private let priorityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -76,8 +76,6 @@ class EditItemViewController: UIViewController {
         return control
     }()
 
-    // completion switch
-
     private let switchLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -95,8 +93,6 @@ class EditItemViewController: UIViewController {
         return completionSwitch
     }()
 
-    // Navigation bar items
-
     let dismissButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.title = "◁ Dismiss"
@@ -110,8 +106,6 @@ class EditItemViewController: UIViewController {
         button.tintColor = .systemGreen
         return button
     }()
-
-
 
     // MARK: - Life Cycle
 
@@ -209,6 +203,7 @@ class EditItemViewController: UIViewController {
     }
 
     // MARK: - Selectors
+    
     @objc
     private func segmentChanged(_ sender: UISegmentedControl) {
         newPriority = sender.selectedSegmentIndex

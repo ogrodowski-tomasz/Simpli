@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
+    /// Set title and image in horizontal Stack
     func setTitle(_ title: String, andImage image: UIImage) {
         let titleLbl = UILabel()
         titleLbl.text = title

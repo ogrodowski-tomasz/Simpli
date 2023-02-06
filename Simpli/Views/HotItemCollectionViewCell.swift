@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-
-
 class HotItemCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Properties
@@ -17,14 +15,11 @@ class HotItemCollectionViewCell: UICollectionViewCell {
     static let id = "HotItemCollectionViewCell"
 
     private var item: ItemViewModel? = nil {
-        didSet {
-            propagateItemData()
-        }
+        didSet { setupViewComponentsInitialValues() }
     }
 
     // MARK: - View Components
 
-    // titleLabel
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +29,6 @@ class HotItemCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    // priorityLabel
     private let priorityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +42,6 @@ class HotItemCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
         layout()
     }
 
@@ -57,9 +50,6 @@ class HotItemCollectionViewCell: UICollectionViewCell {
     }
 
     // MARK: - Helpers
-    private func setup() {
-
-    }
 
     private func layout() {
         addSubview(titleLabel)
@@ -81,7 +71,7 @@ class HotItemCollectionViewCell: UICollectionViewCell {
         self.item = item
     }
 
-    func propagateItemData() {
+    func setupViewComponentsInitialValues() {
         guard let item = item else { return }
         titleLabel.text = item.title
         titleLabel.textColor = item.color

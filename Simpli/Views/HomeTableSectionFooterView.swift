@@ -9,17 +9,29 @@ import CoreData
 import Foundation
 import UIKit
 
+/// Footer buttons actions propagator
 protocol SectionFooterDelegate: AnyObject {
+    /// 'Edit project button' tapped -> should navigate to Edit Item View
     func editProjectTapped(project: ProjectViewModel)
+    /// 'Delete project button' tapped -> should delete project from db
     func deleteProjectTapped(project: ProjectViewModel)
 }
 
 class HomeTableSectionFooterView: UITableViewHeaderFooterView {
 
+    // MARK: - Properties
+
     static let id = "HomeTableSectionFooterView"
 
     static let buttonCornerRadius: CGFloat = 5
+
     static let buttonBorderWidth: CGFloat = 1
+
+    private var project: ProjectViewModel? = nil
+
+    weak var delegate: SectionFooterDelegate?
+
+    // MARK: - View Components
 
     private let deleteButton: UIButton = {
         let button = UIButton()
@@ -49,10 +61,7 @@ class HomeTableSectionFooterView: UITableViewHeaderFooterView {
         return button
     }()
 
-
-    private var project: ProjectViewModel? = nil
-
-    weak var delegate: SectionFooterDelegate?
+    // MARK: - Life cycle
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -63,6 +72,8 @@ class HomeTableSectionFooterView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+
+    // MARK: - Helpers
 
     private func setup() {
         backgroundColor = Constans.appColor
@@ -92,16 +103,16 @@ class HomeTableSectionFooterView: UITableViewHeaderFooterView {
         self.project = project
     }
 
+    // MARK: - Selectors
+
     @objc
     private func editButtonTapped() {
-        print("DEBUG: Edit button tapped in footer")
         guard let project = project else { return }
         delegate?.editProjectTapped(project: project)
     }
 
     @objc
     private func deleteButtonTapped() {
-        print("DEBUG: Delete button tapped in footer")
         guard let project = project else { return }
         delegate?.deleteProjectTapped(project: project)
     }

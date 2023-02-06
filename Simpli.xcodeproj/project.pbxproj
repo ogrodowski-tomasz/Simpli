@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E4504342990FFB00023FAC7 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4504332990FFB00023FAC7 /* ItemViewModel.swift */; };
 		1E9EAB65298FD53900627137 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9EAB64298FD53900627137 /* EditItemViewController.swift */; };
 		1E9EAB67298FD6D600627137 /* ItemPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9EAB66298FD6D600627137 /* ItemPriority.swift */; };
 		1EA9091D29906D620011E1E8 /* HotItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA9091C29906D620011E1E8 /* HotItemCollectionViewCell.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E4504332990FFB00023FAC7 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		1E9EAB64298FD53900627137 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		1E9EAB66298FD6D600627137 /* ItemPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPriority.swift; sourceTree = "<group>"; };
 		1EA9091C29906D620011E1E8 /* HotItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotItemCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				1EFCBBCA298BEC8700C2D529 /* ProjectViewModel.swift */,
+				1E4504332990FFB00023FAC7 /* ItemViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				1EFCBBC0298BE8D200C2D529 /* CoreDataManager.swift in Sources */,
 				1EFCBBBA298BE17400C2D529 /* UIViewController+Extensions.swift in Sources */,
 				1EFCBBCD298BEEEA00C2D529 /* BaseModel.swift in Sources */,
+				1E4504342990FFB00023FAC7 /* ItemViewModel.swift in Sources */,
 				1EFCBBC4298BE8F800C2D529 /* ProjectModel.xcdatamodeld in Sources */,
 				1EFCBBC6298BE9D200C2D529 /* UIColorTransformer.swift in Sources */,
 				1EFCBBCB298BEC8700C2D529 /* ProjectViewModel.swift in Sources */,

@@ -83,16 +83,15 @@ class HomeViewController: UIViewController {
     }
 
     private func setupProjectSubscription() {
-        projectService.subject
-            .sink { completion in
+        projectService.projetsSubject
+            .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     print("DEBUG: Subscription finished successfully")
                 case .failure(let error):
-                    print("DEBUG: Subscription finished with failure: \(error)")
+                    self?.presentError(message: error.localizedDescription)
                 }
             } receiveValue: { [weak self] fetchedProjects in
-                print("DEBUG: Received new value!")
                 self?.projects = fetchedProjects
             }
             .store(in: &cancellables)
@@ -100,12 +99,12 @@ class HomeViewController: UIViewController {
 
     private func setupHotItemsSubscription() {
         projectService.hotItemsSubject
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     print("DEBUG: Subscription finished successfully")
                 case .failure(let error):
-                    print("DEBUG: Subscription finished with failure: \(error)")
+                    self?.presentError(message: error.localizedDescription)
                 }
             } receiveValue: { [weak self] fetchedHotItems in
                 self?.hotItems = fetchedHotItems
@@ -120,13 +119,20 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(editItemVC, animated: true)
     }
 
+    private func presentError(message: String) {
+        let alert = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
+            self?.projectService.fetchData()
+        }))
+
+    }
+
     // MARK: - Selectors
 
     @objc
     private func plusButtonTapped() {
-        print("DEBUG: plus tapped")
         projectService.addProject()
-        
     }
 }
 

@@ -9,6 +9,7 @@ import CoreData
 import Foundation
 import UIKit
 
+/// Updated Project's information propagator
 protocol EditProjectViewDelegate: AnyObject {
     func updateProject(projectID: NSManagedObjectID, newName: String, newClosedStatus: Bool, newColor: UIColor)
 }
@@ -181,20 +182,22 @@ class EditProjectViewController: UIViewController {
         ])
     }
 
+    private func popVC() {
+        navigationController?.popViewController(animated: true)
+    }
+
     // MARK: - Selectors
 
     @objc
     private func dismissButtonTapped() {
-        print("DEBUG: Dismiss button tapped")
-        navigationController?.popViewController(animated: true)
+        popVC()
     }
 
     @objc
     private func saveButtonTapped() {
-        print("DEBUG: Save button tapped")
         guard let newName = titleTextField.text else { return }
         delegate?.updateProject(projectID: project.id, newName: newName, newClosedStatus: closed, newColor: selectedColor)
-        navigationController?.popViewController(animated: true)
+        popVC()
     }
 
     @objc
@@ -260,12 +263,5 @@ extension EditProjectViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 
-extension EditProjectViewController: UICollectionViewDelegate {
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        collectionView.deselectItem(at: indexPath, animated: true)
-//        let color = possibleColors[indexPath.row]
-//        selectedColor = color
-//        colorcCollectionView.reloadData()
-//    }
-}
+extension EditProjectViewController: UICollectionViewDelegate { }
 

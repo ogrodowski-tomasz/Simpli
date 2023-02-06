@@ -9,7 +9,12 @@ import Foundation
 import UIKit
 
 class ItemTableViewCell: UITableViewCell {
+    
+    // MARK: - Properties
+
     static let id = "ItemTableViewCell"
+
+    // MARK: - View Components
 
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -35,9 +40,10 @@ class ItemTableViewCell: UITableViewCell {
         return imageView
     }()
 
+    // MARK: - Life cycle
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
         layout()
     }
 
@@ -45,9 +51,7 @@ class ItemTableViewCell: UITableViewCell {
         fatalError()
     }
 
-    private func setup() {
-
-    }
+    // MARK: - Helpers
 
     private func layout() {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, priorityLabel])
@@ -70,11 +74,18 @@ class ItemTableViewCell: UITableViewCell {
         ])
     }
 
+
+    /// Inject ItemViewModel to style this cell
+    /// - Parameters:
+    ///   - itemVM: ItemViewModel of current row
+    ///   - bgColor: background Color of current row.
     func configure(itemVM: ItemViewModel, bgColor: UIColor) {
         titleLabel.text = itemVM.title
         priorityLabel.text = itemVM.priority.description
         completedImage.isHidden = !itemVM.completed
         backgroundColor = bgColor
     }
+
+    // MARK: - Selectors
 
 }
