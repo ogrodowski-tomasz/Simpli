@@ -25,17 +25,35 @@ class HomeViewController: UIViewController {
         return tableView
     }()
 
+    private let emptyViewLabel: UILabel = {
+        let label = UILabel()
+        label.text = "You have no projects yet.\n\n Press + button to begin Your journey!"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Constans.appFontColor
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.lineBreakMode = .byClipping
+        return label
+    }()
+
     // MARK: - Properties
 
     private var cancellables = Set<AnyCancellable>()
     private let projectService = ProjectsService()
 
     private var projects = [ProjectViewModel]() {
-        didSet { tableView.reloadData() }
+        didSet {
+            emptyViewLabel.isHidden = !projects.isEmpty
+            tableView.isHidden = projects.isEmpty
+            tableView.reloadData()
+        }
     }
 
     private var hotItems = [ItemViewModel]() {
-        didSet { tableHeader.configure(hotItems: hotItems) }
+        didSet {
+            tableHeader.configure(hotItems: hotItems)
+        }
     }
 
     // MARK: - Lifecycle
@@ -74,11 +92,16 @@ class HomeViewController: UIViewController {
 
     private func layout() {
         view.addSubview(tableView)
+        view.addSubview(emptyViewLabel)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 0),
             tableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 0),
             tableView.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: 0),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: tableView.trailingAnchor, multiplier: 0)
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: tableView.trailingAnchor, multiplier: 0),
+
+            emptyViewLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: emptyViewLabel.trailingAnchor, multiplier: 1),
+            emptyViewLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 
