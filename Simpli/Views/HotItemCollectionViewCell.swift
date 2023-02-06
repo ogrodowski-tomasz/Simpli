@@ -71,7 +71,7 @@ class HotItemCollectionViewCell: UICollectionViewCell {
         self.item = item
     }
 
-    func setupViewComponentsInitialValues() {
+    private func setupViewComponentsInitialValues() {
         guard let item = item else { return }
         titleLabel.text = item.title
         titleLabel.textColor = item.color
